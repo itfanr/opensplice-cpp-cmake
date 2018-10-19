@@ -1,0 +1,363 @@
+# -*-Makefile-*-
+#----------------------------------------------------------------------------
+#       Macros
+#----------------------------------------------------------------------------
+CFG = Release
+
+ifeq ($(CFG), Release)
+CC            = gcc
+CXX           = g++
+LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
+AR            = ar
+PICFLAGS      = -fPIC
+CCFLAGS        =  
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -std=c++0x -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"isocpp2/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp2" -DOSPL_VERSION=6.7.180404OSS
+OBJEXT        = .o
+OUTPUT_OPTION = -o "$@"
+COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
+COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+LDFLAGS       = -L"." -L"../lib" -Wl,-rpath,\$$ORIGIN
+CCC           = $(CXX)
+MAKEFILE      = Makefile.Build_DCPS_ISO_Cpp2_Lib
+DEPENDENCIES  = $(MAKEFILE)
+LTARGETDIR    = ../lib/
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+EXEEXT        = 
+LIBPREFIX     = lib
+LIBSUFFIX     = 
+GENFLAGS      = -O3 -DNDEBUG
+LDLIBS        = -l"ddskernel" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
+OBJS          = .objisocpp2/isocpp2/org/opensplice/domain/Domain$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/domain/qos/DomainParticipantQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/domain/DomainParticipantDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/domain/DomainParticipantRegistry$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/CoherentAccessDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/qos/DataReaderQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/qos/SubscriberQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/QueryDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/BuiltinSubscriberDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/AnyDataReaderDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/cond/QueryConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/cond/ReadConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/SubscriberDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/qos/DataWriterQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/qos/PublisherQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/SuspendedPublicationDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/PublisherDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/CoherentSetDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/AnyDataWriterDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/EntityDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/ObjectDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/ListenerDispatcher$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/TimeUtils$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/QosProviderDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/status/StatusUtils$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/InstanceHandleDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/UserObjectDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/Mutex$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/cond/GuardConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/cond/ConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/cond/WaitSetDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/cond/StatusConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/ObjectSet$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/policy/PolicyDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/EntitySet$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/ReportUtils$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/TopicDescriptionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/BuiltinTopicCopy$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/qos/TopicQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/find$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/FilterDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/AnyTopicDelegate$(OBJEXT) .objisocpp2/isocpp2/dds/sub/status/DataState$(OBJEXT) .objisocpp2/isocpp2/dds/sub/find$(OBJEXT) .objisocpp2/isocpp2/dds/sub/discovery$(OBJEXT) .objisocpp2/isocpp2/dds/pub/discovery$(OBJEXT) .objisocpp2/isocpp2/dds/core/dds_builtinTopicsSplDcps$(OBJEXT) .objisocpp2/isocpp2/dds/core/Time$(OBJEXT) .objisocpp2/isocpp2/dds/core/Reference$(OBJEXT) .objisocpp2/isocpp2/dds/core/status/State$(OBJEXT) .objisocpp2/isocpp2/dds/core/Duration$(OBJEXT) .objisocpp2/isocpp2/dds/core/Exception$(OBJEXT) .objisocpp2/isocpp2/dds/core/dds_dcps_builtintopicsSplDcps$(OBJEXT) .objisocpp2/isocpp2/dds/core/policy/CorePolicy$(OBJEXT) .objisocpp2/isocpp2/dds/topic/discovery$(OBJEXT)
+AREXT         = .a
+LIB           = $(LTARGETDIR)$(LIBPREFIX)dcpsisocpp2$(LIBSUFFIX)$(AREXT)
+SOEXT         = .so
+SHTARGETDIR   = ../lib/
+SHLIB         = $(SHTARGETDIR)$(LIBPREFIX)dcpsisocpp2$(LIBSUFFIX)$(SOEXT)
+SHFLAGS       = -shared
+SRC           = isocpp2/org/opensplice/domain/Domain.cpp isocpp2/org/opensplice/domain/qos/DomainParticipantQosDelegate.cpp isocpp2/org/opensplice/domain/DomainParticipantDelegate.cpp isocpp2/org/opensplice/domain/DomainParticipantRegistry.cpp isocpp2/org/opensplice/sub/CoherentAccessDelegate.cpp isocpp2/org/opensplice/sub/qos/DataReaderQosDelegate.cpp isocpp2/org/opensplice/sub/qos/SubscriberQosDelegate.cpp isocpp2/org/opensplice/sub/QueryDelegate.cpp isocpp2/org/opensplice/sub/BuiltinSubscriberDelegate.cpp isocpp2/org/opensplice/sub/AnyDataReaderDelegate.cpp isocpp2/org/opensplice/sub/cond/QueryConditionDelegate.cpp isocpp2/org/opensplice/sub/cond/ReadConditionDelegate.cpp isocpp2/org/opensplice/sub/SubscriberDelegate.cpp isocpp2/org/opensplice/pub/qos/DataWriterQosDelegate.cpp isocpp2/org/opensplice/pub/qos/PublisherQosDelegate.cpp isocpp2/org/opensplice/pub/SuspendedPublicationDelegate.cpp isocpp2/org/opensplice/pub/PublisherDelegate.cpp isocpp2/org/opensplice/pub/CoherentSetDelegate.cpp isocpp2/org/opensplice/pub/AnyDataWriterDelegate.cpp isocpp2/org/opensplice/core/EntityDelegate.cpp isocpp2/org/opensplice/core/ObjectDelegate.cpp isocpp2/org/opensplice/core/ListenerDispatcher.cpp isocpp2/org/opensplice/core/TimeUtils.cpp isocpp2/org/opensplice/core/QosProviderDelegate.cpp isocpp2/org/opensplice/core/status/StatusUtils.cpp isocpp2/org/opensplice/core/InstanceHandleDelegate.cpp isocpp2/org/opensplice/core/UserObjectDelegate.cpp isocpp2/org/opensplice/core/Mutex.cpp isocpp2/org/opensplice/core/cond/GuardConditionDelegate.cpp isocpp2/org/opensplice/core/cond/ConditionDelegate.cpp isocpp2/org/opensplice/core/cond/WaitSetDelegate.cpp isocpp2/org/opensplice/core/cond/StatusConditionDelegate.cpp isocpp2/org/opensplice/core/ObjectSet.cpp isocpp2/org/opensplice/core/policy/PolicyDelegate.cpp isocpp2/org/opensplice/core/EntitySet.cpp isocpp2/org/opensplice/core/ReportUtils.cpp isocpp2/org/opensplice/topic/TopicDescriptionDelegate.cpp isocpp2/org/opensplice/topic/BuiltinTopicCopy.cpp isocpp2/org/opensplice/topic/qos/TopicQosDelegate.cpp isocpp2/org/opensplice/topic/find.cpp isocpp2/org/opensplice/topic/FilterDelegate.cpp isocpp2/org/opensplice/topic/AnyTopicDelegate.cpp isocpp2/dds/sub/status/DataState.cpp isocpp2/dds/sub/find.cpp isocpp2/dds/sub/discovery.cpp isocpp2/dds/pub/discovery.cpp isocpp2/dds/core/dds_builtinTopicsSplDcps.cpp isocpp2/dds/core/Time.cpp isocpp2/dds/core/Reference.cpp isocpp2/dds/core/status/State.cpp isocpp2/dds/core/Duration.cpp isocpp2/dds/core/Exception.cpp isocpp2/dds/core/dds_dcps_builtintopicsSplDcps.cpp isocpp2/dds/core/policy/CorePolicy.cpp isocpp2/dds/topic/discovery.cpp
+LINK.cc       = $(LD) $(LDFLAGS)
+DYNAMICFLAGS  = -DBUILD_OMG_DDS_API
+EXPORTFLAGS   = $(DYNAMICFLAGS)
+endif
+ifeq ($(CFG), Debug)
+CC            = gcc
+CXX           = g++
+LD            = $(CXX) $(CCFLAGS) $(PICFLAGS) $(GENFLAGS)
+AR            = ar
+PICFLAGS      = -fPIC
+CCFLAGS        =  
+CPPFLAGS      = $(PICFLAGS) $(GENFLAGS) -D_REENTRANT -D_POSIX_C_SOURCE=200112L -D_XOPEN_SOURCE=500 -Wall -Wno-unused-function -std=c++0x -I"../include" -I"../include/sys" -I"$(BOOST_ROOT)/." -I"isocpp2/generated" -I"../include/dcps/C++/SACPP" -I"../include/dcps/C++/isocpp2" -DOSPL_VERSION=6.7.180404OSS
+OBJEXT        = .o
+OUTPUT_OPTION = -o "$@"
+COMPILE.c     = $(CC) $(CFLAGS) $(CPPFLAGS) -c
+COMPILE.cc    = $(CXX) $(CCFLAGS) $(CPPFLAGS) -c
+LDFLAGS       = -L"." -L"../lib" -Wl,-rpath,\$$ORIGIN
+CCC           = $(CXX)
+MAKEFILE      = Makefile.Build_DCPS_ISO_Cpp2_Lib
+DEPENDENCIES  = $(MAKEFILE)
+LTARGETDIR    = ../lib/
+CAT           = cat
+MV            = mv -f
+RM            = rm -rf
+CP            = cp -p
+NUL           = /dev/null
+MKDIR         = mkdir -p
+TESTDIRSTART  = test -d
+TESTDIREND    = ||
+TOUCH         = touch
+EXEEXT        = 
+LIBPREFIX     = lib
+LIBSUFFIX     = 
+GENFLAGS      = -g
+LDLIBS        = -l"ddskernel" -ldl $(subst lib,-l,$(sort $(basename $(notdir $(wildcard /usr/lib/librt.so /lib/librt.so))))) -lpthread
+OBJS          = .objisocpp2/isocpp2/org/opensplice/domain/Domain$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/domain/qos/DomainParticipantQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/domain/DomainParticipantDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/domain/DomainParticipantRegistry$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/CoherentAccessDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/qos/DataReaderQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/qos/SubscriberQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/QueryDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/BuiltinSubscriberDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/AnyDataReaderDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/cond/QueryConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/cond/ReadConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/sub/SubscriberDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/qos/DataWriterQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/qos/PublisherQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/SuspendedPublicationDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/PublisherDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/CoherentSetDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/pub/AnyDataWriterDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/EntityDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/ObjectDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/ListenerDispatcher$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/TimeUtils$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/QosProviderDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/status/StatusUtils$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/InstanceHandleDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/UserObjectDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/Mutex$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/cond/GuardConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/cond/ConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/cond/WaitSetDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/cond/StatusConditionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/ObjectSet$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/policy/PolicyDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/EntitySet$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/core/ReportUtils$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/TopicDescriptionDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/BuiltinTopicCopy$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/qos/TopicQosDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/find$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/FilterDelegate$(OBJEXT) .objisocpp2/isocpp2/org/opensplice/topic/AnyTopicDelegate$(OBJEXT) .objisocpp2/isocpp2/dds/sub/status/DataState$(OBJEXT) .objisocpp2/isocpp2/dds/sub/find$(OBJEXT) .objisocpp2/isocpp2/dds/sub/discovery$(OBJEXT) .objisocpp2/isocpp2/dds/pub/discovery$(OBJEXT) .objisocpp2/isocpp2/dds/core/dds_builtinTopicsSplDcps$(OBJEXT) .objisocpp2/isocpp2/dds/core/Time$(OBJEXT) .objisocpp2/isocpp2/dds/core/Reference$(OBJEXT) .objisocpp2/isocpp2/dds/core/status/State$(OBJEXT) .objisocpp2/isocpp2/dds/core/Duration$(OBJEXT) .objisocpp2/isocpp2/dds/core/Exception$(OBJEXT) .objisocpp2/isocpp2/dds/core/dds_dcps_builtintopicsSplDcps$(OBJEXT) .objisocpp2/isocpp2/dds/core/policy/CorePolicy$(OBJEXT) .objisocpp2/isocpp2/dds/topic/discovery$(OBJEXT)
+AREXT         = .a
+LIB           = $(LTARGETDIR)$(LIBPREFIX)dcpsisocpp2$(LIBSUFFIX)$(AREXT)
+SOEXT         = .so
+SHTARGETDIR   = ../lib/
+SHLIB         = $(SHTARGETDIR)$(LIBPREFIX)dcpsisocpp2$(LIBSUFFIX)$(SOEXT)
+SHFLAGS       = -shared
+SRC           = isocpp2/org/opensplice/domain/Domain.cpp isocpp2/org/opensplice/domain/qos/DomainParticipantQosDelegate.cpp isocpp2/org/opensplice/domain/DomainParticipantDelegate.cpp isocpp2/org/opensplice/domain/DomainParticipantRegistry.cpp isocpp2/org/opensplice/sub/CoherentAccessDelegate.cpp isocpp2/org/opensplice/sub/qos/DataReaderQosDelegate.cpp isocpp2/org/opensplice/sub/qos/SubscriberQosDelegate.cpp isocpp2/org/opensplice/sub/QueryDelegate.cpp isocpp2/org/opensplice/sub/BuiltinSubscriberDelegate.cpp isocpp2/org/opensplice/sub/AnyDataReaderDelegate.cpp isocpp2/org/opensplice/sub/cond/QueryConditionDelegate.cpp isocpp2/org/opensplice/sub/cond/ReadConditionDelegate.cpp isocpp2/org/opensplice/sub/SubscriberDelegate.cpp isocpp2/org/opensplice/pub/qos/DataWriterQosDelegate.cpp isocpp2/org/opensplice/pub/qos/PublisherQosDelegate.cpp isocpp2/org/opensplice/pub/SuspendedPublicationDelegate.cpp isocpp2/org/opensplice/pub/PublisherDelegate.cpp isocpp2/org/opensplice/pub/CoherentSetDelegate.cpp isocpp2/org/opensplice/pub/AnyDataWriterDelegate.cpp isocpp2/org/opensplice/core/EntityDelegate.cpp isocpp2/org/opensplice/core/ObjectDelegate.cpp isocpp2/org/opensplice/core/ListenerDispatcher.cpp isocpp2/org/opensplice/core/TimeUtils.cpp isocpp2/org/opensplice/core/QosProviderDelegate.cpp isocpp2/org/opensplice/core/status/StatusUtils.cpp isocpp2/org/opensplice/core/InstanceHandleDelegate.cpp isocpp2/org/opensplice/core/UserObjectDelegate.cpp isocpp2/org/opensplice/core/Mutex.cpp isocpp2/org/opensplice/core/cond/GuardConditionDelegate.cpp isocpp2/org/opensplice/core/cond/ConditionDelegate.cpp isocpp2/org/opensplice/core/cond/WaitSetDelegate.cpp isocpp2/org/opensplice/core/cond/StatusConditionDelegate.cpp isocpp2/org/opensplice/core/ObjectSet.cpp isocpp2/org/opensplice/core/policy/PolicyDelegate.cpp isocpp2/org/opensplice/core/EntitySet.cpp isocpp2/org/opensplice/core/ReportUtils.cpp isocpp2/org/opensplice/topic/TopicDescriptionDelegate.cpp isocpp2/org/opensplice/topic/BuiltinTopicCopy.cpp isocpp2/org/opensplice/topic/qos/TopicQosDelegate.cpp isocpp2/org/opensplice/topic/find.cpp isocpp2/org/opensplice/topic/FilterDelegate.cpp isocpp2/org/opensplice/topic/AnyTopicDelegate.cpp isocpp2/dds/sub/status/DataState.cpp isocpp2/dds/sub/find.cpp isocpp2/dds/sub/discovery.cpp isocpp2/dds/pub/discovery.cpp isocpp2/dds/core/dds_builtinTopicsSplDcps.cpp isocpp2/dds/core/Time.cpp isocpp2/dds/core/Reference.cpp isocpp2/dds/core/status/State.cpp isocpp2/dds/core/Duration.cpp isocpp2/dds/core/Exception.cpp isocpp2/dds/core/dds_dcps_builtintopicsSplDcps.cpp isocpp2/dds/core/policy/CorePolicy.cpp isocpp2/dds/topic/discovery.cpp
+LINK.cc       = $(LD) $(LDFLAGS)
+DYNAMICFLAGS  = -DBUILD_OMG_DDS_API
+EXPORTFLAGS   = $(DYNAMICFLAGS)
+endif
+
+#----------------------------------------------------------------------------
+#       Local targets
+#----------------------------------------------------------------------------
+
+all: $(SHLIB) __postbuild__
+
+$(SHLIB): $(OBJS)
+	@$(TESTDIRSTART) "$(SHTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(SHTARGETDIR)"
+	$(LINK.cc) $(SHFLAGS) $(OBJS) $(LDLIBS) $(OUTPUT_OPTION)
+
+$(LIB): $(OBJS)
+	@$(TESTDIRSTART) "$(LTARGETDIR)" $(TESTDIREND) $(MKDIR) "$(LTARGETDIR)"
+	$(AR) $(ARFLAGS) $(LIB) $(OBJS) 
+
+GENERATED_DIRTY = isocpp2/generated/dds_builtinTopicsSplType.h isocpp2/generated/dds_dcps_builtintopicsSplType.h isocpp2/generated/dds_namedQosTypesSplType.h
+
+export DYLD_LIBRARY_PATH := $(DYLD_LIBRARY_PATH):../bin:../lib
+export LD_LIBRARY_PATH   := $(LD_LIBRARY_PATH):../bin:../lib
+export SHLIB_PATH        := $(SHLIB_PATH):../bin:../lib
+export LIBPATH           := $(LIBPATH):../bin:../lib
+export PATH              := $(PATH):../bin:../lib
+isocpp2/generated/dds_builtinTopicsSplType.h: ../etc/idl/dds_builtinTopics.idl
+	"../bin/idlpp" -I "../etc/idl" -l c -S -m SPLTYPE -d isocpp2/generated ../etc/idl/dds_builtinTopics.idl
+
+isocpp2/generated/dds_dcps_builtintopicsSplType.h: ../etc/idl/dds_dcps_builtintopics.idl
+	"../bin/idlpp" -I "../etc/idl" -l c -S -m SPLTYPE -d isocpp2/generated ../etc/idl/dds_dcps_builtintopics.idl
+
+isocpp2/generated/dds_namedQosTypesSplType.h: ../etc/idl/dds_namedQosTypes.idl
+	"../bin/idlpp" -I "../etc/idl" -l c -S -m SPLTYPE -d isocpp2/generated ../etc/idl/dds_namedQosTypes.idl
+
+.PRECIOUS: $(GENERATED_DIRTY)
+$(OBJS): $(GENERATED_DIRTY)
+
+generated: $(GENERATED_DIRTY)
+	@-:
+
+.objisocpp2/isocpp2/org/opensplice/domain/Domain$(OBJEXT): isocpp2/org/opensplice/domain/Domain.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/domain" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/domain"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/domain/Domain.cpp
+
+.objisocpp2/isocpp2/org/opensplice/domain/qos/DomainParticipantQosDelegate$(OBJEXT): isocpp2/org/opensplice/domain/qos/DomainParticipantQosDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/domain/qos" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/domain/qos"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/domain/qos/DomainParticipantQosDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/domain/DomainParticipantDelegate$(OBJEXT): isocpp2/org/opensplice/domain/DomainParticipantDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/domain" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/domain"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/domain/DomainParticipantDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/domain/DomainParticipantRegistry$(OBJEXT): isocpp2/org/opensplice/domain/DomainParticipantRegistry.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/domain" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/domain"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/domain/DomainParticipantRegistry.cpp
+
+.objisocpp2/isocpp2/org/opensplice/sub/CoherentAccessDelegate$(OBJEXT): isocpp2/org/opensplice/sub/CoherentAccessDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/sub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/sub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/sub/CoherentAccessDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/sub/qos/DataReaderQosDelegate$(OBJEXT): isocpp2/org/opensplice/sub/qos/DataReaderQosDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/sub/qos" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/sub/qos"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/sub/qos/DataReaderQosDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/sub/qos/SubscriberQosDelegate$(OBJEXT): isocpp2/org/opensplice/sub/qos/SubscriberQosDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/sub/qos" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/sub/qos"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/sub/qos/SubscriberQosDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/sub/QueryDelegate$(OBJEXT): isocpp2/org/opensplice/sub/QueryDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/sub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/sub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/sub/QueryDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/sub/BuiltinSubscriberDelegate$(OBJEXT): isocpp2/org/opensplice/sub/BuiltinSubscriberDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/sub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/sub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/sub/BuiltinSubscriberDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/sub/AnyDataReaderDelegate$(OBJEXT): isocpp2/org/opensplice/sub/AnyDataReaderDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/sub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/sub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/sub/AnyDataReaderDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/sub/cond/QueryConditionDelegate$(OBJEXT): isocpp2/org/opensplice/sub/cond/QueryConditionDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/sub/cond" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/sub/cond"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/sub/cond/QueryConditionDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/sub/cond/ReadConditionDelegate$(OBJEXT): isocpp2/org/opensplice/sub/cond/ReadConditionDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/sub/cond" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/sub/cond"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/sub/cond/ReadConditionDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/sub/SubscriberDelegate$(OBJEXT): isocpp2/org/opensplice/sub/SubscriberDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/sub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/sub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/sub/SubscriberDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/pub/qos/DataWriterQosDelegate$(OBJEXT): isocpp2/org/opensplice/pub/qos/DataWriterQosDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/pub/qos" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/pub/qos"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/pub/qos/DataWriterQosDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/pub/qos/PublisherQosDelegate$(OBJEXT): isocpp2/org/opensplice/pub/qos/PublisherQosDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/pub/qos" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/pub/qos"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/pub/qos/PublisherQosDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/pub/SuspendedPublicationDelegate$(OBJEXT): isocpp2/org/opensplice/pub/SuspendedPublicationDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/pub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/pub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/pub/SuspendedPublicationDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/pub/PublisherDelegate$(OBJEXT): isocpp2/org/opensplice/pub/PublisherDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/pub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/pub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/pub/PublisherDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/pub/CoherentSetDelegate$(OBJEXT): isocpp2/org/opensplice/pub/CoherentSetDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/pub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/pub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/pub/CoherentSetDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/pub/AnyDataWriterDelegate$(OBJEXT): isocpp2/org/opensplice/pub/AnyDataWriterDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/pub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/pub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/pub/AnyDataWriterDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/EntityDelegate$(OBJEXT): isocpp2/org/opensplice/core/EntityDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/EntityDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/ObjectDelegate$(OBJEXT): isocpp2/org/opensplice/core/ObjectDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/ObjectDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/ListenerDispatcher$(OBJEXT): isocpp2/org/opensplice/core/ListenerDispatcher.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/ListenerDispatcher.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/TimeUtils$(OBJEXT): isocpp2/org/opensplice/core/TimeUtils.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/TimeUtils.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/QosProviderDelegate$(OBJEXT): isocpp2/org/opensplice/core/QosProviderDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/QosProviderDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/status/StatusUtils$(OBJEXT): isocpp2/org/opensplice/core/status/StatusUtils.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core/status" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core/status"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/status/StatusUtils.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/InstanceHandleDelegate$(OBJEXT): isocpp2/org/opensplice/core/InstanceHandleDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/InstanceHandleDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/UserObjectDelegate$(OBJEXT): isocpp2/org/opensplice/core/UserObjectDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/UserObjectDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/Mutex$(OBJEXT): isocpp2/org/opensplice/core/Mutex.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/Mutex.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/cond/GuardConditionDelegate$(OBJEXT): isocpp2/org/opensplice/core/cond/GuardConditionDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core/cond" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core/cond"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/cond/GuardConditionDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/cond/ConditionDelegate$(OBJEXT): isocpp2/org/opensplice/core/cond/ConditionDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core/cond" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core/cond"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/cond/ConditionDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/cond/WaitSetDelegate$(OBJEXT): isocpp2/org/opensplice/core/cond/WaitSetDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core/cond" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core/cond"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/cond/WaitSetDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/cond/StatusConditionDelegate$(OBJEXT): isocpp2/org/opensplice/core/cond/StatusConditionDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core/cond" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core/cond"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/cond/StatusConditionDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/ObjectSet$(OBJEXT): isocpp2/org/opensplice/core/ObjectSet.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/ObjectSet.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/policy/PolicyDelegate$(OBJEXT): isocpp2/org/opensplice/core/policy/PolicyDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core/policy" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core/policy"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/policy/PolicyDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/EntitySet$(OBJEXT): isocpp2/org/opensplice/core/EntitySet.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/EntitySet.cpp
+
+.objisocpp2/isocpp2/org/opensplice/core/ReportUtils$(OBJEXT): isocpp2/org/opensplice/core/ReportUtils.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/core/ReportUtils.cpp
+
+.objisocpp2/isocpp2/org/opensplice/topic/TopicDescriptionDelegate$(OBJEXT): isocpp2/org/opensplice/topic/TopicDescriptionDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/topic" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/topic"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/topic/TopicDescriptionDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/topic/BuiltinTopicCopy$(OBJEXT): isocpp2/org/opensplice/topic/BuiltinTopicCopy.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/topic" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/topic"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/topic/BuiltinTopicCopy.cpp
+
+.objisocpp2/isocpp2/org/opensplice/topic/qos/TopicQosDelegate$(OBJEXT): isocpp2/org/opensplice/topic/qos/TopicQosDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/topic/qos" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/topic/qos"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/topic/qos/TopicQosDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/topic/find$(OBJEXT): isocpp2/org/opensplice/topic/find.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/topic" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/topic"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/topic/find.cpp
+
+.objisocpp2/isocpp2/org/opensplice/topic/FilterDelegate$(OBJEXT): isocpp2/org/opensplice/topic/FilterDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/topic" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/topic"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/topic/FilterDelegate.cpp
+
+.objisocpp2/isocpp2/org/opensplice/topic/AnyTopicDelegate$(OBJEXT): isocpp2/org/opensplice/topic/AnyTopicDelegate.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/org/opensplice/topic" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/org/opensplice/topic"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/org/opensplice/topic/AnyTopicDelegate.cpp
+
+.objisocpp2/isocpp2/dds/sub/status/DataState$(OBJEXT): isocpp2/dds/sub/status/DataState.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/sub/status" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/sub/status"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/sub/status/DataState.cpp
+
+.objisocpp2/isocpp2/dds/sub/find$(OBJEXT): isocpp2/dds/sub/find.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/sub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/sub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/sub/find.cpp
+
+.objisocpp2/isocpp2/dds/sub/discovery$(OBJEXT): isocpp2/dds/sub/discovery.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/sub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/sub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/sub/discovery.cpp
+
+.objisocpp2/isocpp2/dds/pub/discovery$(OBJEXT): isocpp2/dds/pub/discovery.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/pub" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/pub"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/pub/discovery.cpp
+
+.objisocpp2/isocpp2/dds/core/dds_builtinTopicsSplDcps$(OBJEXT): isocpp2/dds/core/dds_builtinTopicsSplDcps.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/core/dds_builtinTopicsSplDcps.cpp
+
+.objisocpp2/isocpp2/dds/core/Time$(OBJEXT): isocpp2/dds/core/Time.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/core/Time.cpp
+
+.objisocpp2/isocpp2/dds/core/Reference$(OBJEXT): isocpp2/dds/core/Reference.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/core/Reference.cpp
+
+.objisocpp2/isocpp2/dds/core/status/State$(OBJEXT): isocpp2/dds/core/status/State.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/core/status" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/core/status"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/core/status/State.cpp
+
+.objisocpp2/isocpp2/dds/core/Duration$(OBJEXT): isocpp2/dds/core/Duration.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/core/Duration.cpp
+
+.objisocpp2/isocpp2/dds/core/Exception$(OBJEXT): isocpp2/dds/core/Exception.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/core/Exception.cpp
+
+.objisocpp2/isocpp2/dds/core/dds_dcps_builtintopicsSplDcps$(OBJEXT): isocpp2/dds/core/dds_dcps_builtintopicsSplDcps.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/core" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/core"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/core/dds_dcps_builtintopicsSplDcps.cpp
+
+.objisocpp2/isocpp2/dds/core/policy/CorePolicy$(OBJEXT): isocpp2/dds/core/policy/CorePolicy.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/core/policy" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/core/policy"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/core/policy/CorePolicy.cpp
+
+.objisocpp2/isocpp2/dds/topic/discovery$(OBJEXT): isocpp2/dds/topic/discovery.cpp
+	@$(TESTDIRSTART) ".objisocpp2/isocpp2/dds/topic" $(TESTDIREND) $(MKDIR) ".objisocpp2/isocpp2/dds/topic"
+	$(COMPILE.cc) $(EXPORTFLAGS) $(OUTPUT_OPTION) isocpp2/dds/topic/discovery.cpp
+
+clean:
+	-$(RM) $(OBJS)
+
+realclean: clean
+	-$(RM) $(SHLIB) $(LIB)
+	-$(RM) $(GENERATED_DIRTY)
+	-$(RM) .objisocpp2/
+
+check-syntax:
+	$(COMPILE.cc) $(EXPORTFLAGS) $(CHK_SOURCES)
+
+__postbuild__:
+	@cp -f  ./isocpp2/generated/*.h "../include/dcps/C++/SACPP"
+

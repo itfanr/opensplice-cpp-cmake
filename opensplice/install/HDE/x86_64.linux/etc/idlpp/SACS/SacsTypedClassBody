@@ -1,0 +1,608 @@
+$sp($(spaces))#region $(typename)DataReader
+$sp($(spaces))public class $(typename)DataReader : DDS.OpenSplice.FooDataReader<$(typename), $(typename)Marshaler>, 
+$sp($(spaces))                                     I$(typename)DataReader
+$sp($(spaces)){
+$sp($(spaces))    public $(typename)DataReader(DatabaseMarshaler marshaler)
+$sp($(spaces))        : base(marshaler) { }
+
+$sp($(spaces))    public ReturnCode Read(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos)
+$sp($(spaces))    {
+$sp($(spaces))        return Read(ref dataValues, ref sampleInfos, Length.Unlimited);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode Read(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        int maxSamples)
+$sp($(spaces))    {
+$sp($(spaces))        return Read(ref dataValues, ref sampleInfos, maxSamples, SampleStateKind.Any,
+$sp($(spaces))            ViewStateKind.Any, InstanceStateKind.Any);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode Read(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        SampleStateKind sampleStates,
+$sp($(spaces))        ViewStateKind viewStates,
+$sp($(spaces))        InstanceStateKind instanceStates)
+$sp($(spaces))    {
+$sp($(spaces))        return Read(ref dataValues, ref sampleInfos, Length.Unlimited, sampleStates,
+$sp($(spaces))            viewStates, instanceStates);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode Read(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            SampleStateKind sampleStates,
+$sp($(spaces))            ViewStateKind viewStates,
+$sp($(spaces))            InstanceStateKind instanceStates)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.Read(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    sampleStates,
+$sp($(spaces))                    viewStates,
+$sp($(spaces))                    instanceStates);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode Take(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos)
+$sp($(spaces))    {
+$sp($(spaces))        return Take(ref dataValues, ref sampleInfos, Length.Unlimited);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode Take(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        int maxSamples)
+$sp($(spaces))    {
+$sp($(spaces))        return Take(ref dataValues, ref sampleInfos, maxSamples, SampleStateKind.Any,
+$sp($(spaces))            ViewStateKind.Any, InstanceStateKind.Any);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode Take(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        SampleStateKind sampleStates,
+$sp($(spaces))        ViewStateKind viewStates,
+$sp($(spaces))        InstanceStateKind instanceStates)
+$sp($(spaces))    {
+$sp($(spaces))        return Take(ref dataValues, ref sampleInfos, Length.Unlimited, sampleStates,
+$sp($(spaces))            viewStates, instanceStates);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode Take(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            SampleStateKind sampleStates,
+$sp($(spaces))            ViewStateKind viewStates,
+$sp($(spaces))            InstanceStateKind instanceStates)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.Take(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    sampleStates,
+$sp($(spaces))                    viewStates,
+$sp($(spaces))                    instanceStates);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode ReadWithCondition(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        IReadCondition readCondition)
+$sp($(spaces))    {
+$sp($(spaces))        return ReadWithCondition(ref dataValues, ref sampleInfos,
+$sp($(spaces))            Length.Unlimited, readCondition);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode ReadWithCondition(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            IReadCondition readCondition)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.ReadWithCondition(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    readCondition);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode TakeWithCondition(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        IReadCondition readCondition)
+$sp($(spaces))    {
+$sp($(spaces))        return TakeWithCondition(ref dataValues, ref sampleInfos,
+$sp($(spaces))            Length.Unlimited, readCondition);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode TakeWithCondition(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            IReadCondition readCondition)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.TakeWithCondition(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    readCondition);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode ReadNextSample(
+$sp($(spaces))            ref $(typename) dataValue,
+$sp($(spaces))            ref SampleInfo sampleInfo)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.ReadNextSample(
+$sp($(spaces))                    ref dataValue,
+$sp($(spaces))                    ref sampleInfo);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode TakeNextSample(
+$sp($(spaces))            ref $(typename) dataValue,
+$sp($(spaces))            ref SampleInfo sampleInfo)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.TakeNextSample(
+$sp($(spaces))                    ref dataValue,
+$sp($(spaces))                    ref sampleInfo);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode ReadInstance(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return ReadInstance(ref dataValues, ref sampleInfos, Length.Unlimited, instanceHandle);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode ReadInstance(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        int maxSamples,
+$sp($(spaces))        InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return ReadInstance(ref dataValues, ref sampleInfos, maxSamples, instanceHandle,
+$sp($(spaces))            SampleStateKind.Any, ViewStateKind.Any, InstanceStateKind.Any);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode ReadInstance(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            SampleStateKind sampleStates,
+$sp($(spaces))            ViewStateKind viewStates,
+$sp($(spaces))            InstanceStateKind instanceStates)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.ReadInstance(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    instanceHandle,
+$sp($(spaces))                    sampleStates,
+$sp($(spaces))                    viewStates,
+$sp($(spaces))                    instanceStates);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode TakeInstance(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return TakeInstance(ref dataValues, ref sampleInfos, Length.Unlimited, instanceHandle);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode TakeInstance(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        int maxSamples,
+$sp($(spaces))        InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return TakeInstance(ref dataValues, ref sampleInfos, maxSamples, instanceHandle,
+$sp($(spaces))            SampleStateKind.Any, ViewStateKind.Any, InstanceStateKind.Any);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode TakeInstance(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            SampleStateKind sampleStates,
+$sp($(spaces))            ViewStateKind viewStates,
+$sp($(spaces))            InstanceStateKind instanceStates)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.TakeInstance(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    instanceHandle,
+$sp($(spaces))                    sampleStates,
+$sp($(spaces))                    viewStates,
+$sp($(spaces))                    instanceStates);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode ReadNextInstance(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return ReadNextInstance(ref dataValues, ref sampleInfos, Length.Unlimited, instanceHandle);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode ReadNextInstance(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        int maxSamples,
+$sp($(spaces))        InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return ReadNextInstance(ref dataValues, ref sampleInfos, maxSamples, instanceHandle,
+$sp($(spaces))            SampleStateKind.Any, ViewStateKind.Any, InstanceStateKind.Any);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode ReadNextInstance(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            SampleStateKind sampleStates,
+$sp($(spaces))            ViewStateKind viewStates,
+$sp($(spaces))            InstanceStateKind instanceStates)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.ReadNextInstance(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    instanceHandle,
+$sp($(spaces))                    sampleStates,
+$sp($(spaces))                    viewStates,
+$sp($(spaces))                    instanceStates);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode TakeNextInstance(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return TakeNextInstance(ref dataValues, ref sampleInfos, Length.Unlimited, instanceHandle);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode TakeNextInstance(
+$sp($(spaces))        ref $(typename)[] dataValues,
+$sp($(spaces))        ref SampleInfo[] sampleInfos,
+$sp($(spaces))        int maxSamples,
+$sp($(spaces))        InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return TakeNextInstance(ref dataValues, ref sampleInfos, maxSamples, instanceHandle,
+$sp($(spaces))            SampleStateKind.Any, ViewStateKind.Any, InstanceStateKind.Any);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode TakeNextInstance(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            SampleStateKind sampleStates,
+$sp($(spaces))            ViewStateKind viewStates,
+$sp($(spaces))            InstanceStateKind instanceStates)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.TakeNextInstance(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    instanceHandle,
+$sp($(spaces))                    sampleStates,
+$sp($(spaces))                    viewStates,
+$sp($(spaces))                    instanceStates);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode ReadNextInstanceWithCondition(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            IReadCondition readCondition)
+$sp($(spaces))    {
+$sp($(spaces))        return ReadNextInstanceWithCondition(
+$sp($(spaces))            ref dataValues,
+$sp($(spaces))            ref sampleInfos,
+$sp($(spaces))            Length.Unlimited,
+$sp($(spaces))            instanceHandle,
+$sp($(spaces))            readCondition);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode ReadNextInstanceWithCondition(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            IReadCondition readCondition)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.ReadNextInstanceWithCondition(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    instanceHandle,
+$sp($(spaces))                    readCondition);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode TakeNextInstanceWithCondition(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            IReadCondition readCondition)
+$sp($(spaces))    {
+$sp($(spaces))        return TakeNextInstanceWithCondition(
+$sp($(spaces))            ref dataValues,
+$sp($(spaces))            ref sampleInfos,
+$sp($(spaces))            Length.Unlimited,
+$sp($(spaces))            instanceHandle,
+$sp($(spaces))            readCondition);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode TakeNextInstanceWithCondition(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos,
+$sp($(spaces))            int maxSamples,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            IReadCondition readCondition)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.TakeNextInstanceWithCondition(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos,
+$sp($(spaces))                    maxSamples,
+$sp($(spaces))                    instanceHandle,
+$sp($(spaces))                    readCondition);
+
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode ReturnLoan(
+$sp($(spaces))            ref $(typename)[] dataValues,
+$sp($(spaces))            ref SampleInfo[] sampleInfos)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result =
+$sp($(spaces))            base.ReturnLoan(
+$sp($(spaces))                    ref dataValues,
+$sp($(spaces))                    ref sampleInfos);
+
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode GetKeyValue(
+$sp($(spaces))            ref $(typename) key,
+$sp($(spaces))            InstanceHandle handle)
+$sp($(spaces))    {
+$sp($(spaces))        ReturnCode result = base.GetKeyValue(
+$sp($(spaces))                    ref key,
+$sp($(spaces))                    handle);
+$sp($(spaces))        return result;
+$sp($(spaces))    }
+
+$sp($(spaces))    public override InstanceHandle LookupInstance(
+$sp($(spaces))            $(typename) instance)
+$sp($(spaces))    {
+$sp($(spaces))        return
+$sp($(spaces))            base.LookupInstance(
+$sp($(spaces))                    instance);
+$sp($(spaces))    }
+
+$sp($(spaces))}
+$sp($(spaces))#endregion
+$sp($(spaces))
+$sp($(spaces))#region $(typename)DataWriter
+$sp($(spaces))public class $(typename)DataWriter : DDS.OpenSplice.FooDataWriter<$(typename), $(typename)Marshaler>, 
+$sp($(spaces))                                     I$(typename)DataWriter
+$sp($(spaces)){
+$sp($(spaces))    public $(typename)DataWriter(DatabaseMarshaler marshaler)
+$sp($(spaces))        : base(marshaler) { }
+
+$sp($(spaces))    public InstanceHandle RegisterInstance(
+$sp($(spaces))            $(typename) instanceData)
+$sp($(spaces))    {
+$sp($(spaces))        return base.RegisterInstance(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                Time.Current);
+$sp($(spaces))    }
+
+$sp($(spaces))    public InstanceHandle RegisterInstanceWithTimestamp(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            Time sourceTimestamp)
+$sp($(spaces))    {
+$sp($(spaces))        return base.RegisterInstance(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                sourceTimestamp);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode UnregisterInstance(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return base.UnregisterInstance(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                instanceHandle,
+$sp($(spaces))                Time.Current);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode UnregisterInstanceWithTimestamp(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            Time sourceTimestamp)
+$sp($(spaces))    {
+$sp($(spaces))        return base.UnregisterInstance(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                instanceHandle,
+$sp($(spaces))                sourceTimestamp);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode Write($(typename) instanceData)
+$sp($(spaces))    {
+$sp($(spaces))        return base.Write(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                InstanceHandle.Nil,
+$sp($(spaces))                Time.Current);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode Write(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return base.Write(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                instanceHandle,
+$sp($(spaces))                Time.Current);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode WriteWithTimestamp(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            Time sourceTimestamp)
+$sp($(spaces))    {
+$sp($(spaces))        return base.Write(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                InstanceHandle.Nil,
+$sp($(spaces))                sourceTimestamp);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode WriteWithTimestamp(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            Time sourceTimestamp)
+$sp($(spaces))    {
+$sp($(spaces))        return base.Write(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                instanceHandle,
+$sp($(spaces))                sourceTimestamp);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode Dispose(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return base.Dispose(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                instanceHandle,
+$sp($(spaces))                Time.Current);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode DisposeWithTimestamp(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            Time sourceTimestamp)
+$sp($(spaces))    {
+$sp($(spaces))        return base.Dispose(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                instanceHandle,
+$sp($(spaces))                sourceTimestamp);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode WriteDispose(
+$sp($(spaces))            $(typename) instanceData)
+$sp($(spaces))    {
+$sp($(spaces))        return base.WriteDispose(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                InstanceHandle.Nil,
+$sp($(spaces))                Time.Current);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode WriteDispose(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return base.WriteDispose(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                instanceHandle,
+$sp($(spaces))                Time.Current);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode WriteDisposeWithTimestamp(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            Time sourceTimestamp)
+$sp($(spaces))    {
+$sp($(spaces))        return base.WriteDispose(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                InstanceHandle.Nil,
+$sp($(spaces))                sourceTimestamp);
+$sp($(spaces))    }
+
+$sp($(spaces))    public ReturnCode WriteDisposeWithTimestamp(
+$sp($(spaces))            $(typename) instanceData,
+$sp($(spaces))            InstanceHandle instanceHandle,
+$sp($(spaces))            Time sourceTimestamp)
+$sp($(spaces))    {
+$sp($(spaces))        return base.WriteDispose(
+$sp($(spaces))                instanceData,
+$sp($(spaces))                instanceHandle,
+$sp($(spaces))                sourceTimestamp);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override ReturnCode GetKeyValue(
+$sp($(spaces))            ref $(typename) key,
+$sp($(spaces))            InstanceHandle instanceHandle)
+$sp($(spaces))    {
+$sp($(spaces))        return base.GetKeyValue(ref key, instanceHandle);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override InstanceHandle LookupInstance(
+$sp($(spaces))        $(typename) instanceData)
+$sp($(spaces))    {
+$sp($(spaces))        return base.LookupInstance(instanceData);
+$sp($(spaces))    }
+$sp($(spaces))}
+$sp($(spaces))#endregion
+
+$sp($(spaces))#region $(typename)TypeSupport
+$sp($(spaces))public class $(typename)TypeSupport : DDS.OpenSplice.TypeSupport
+$sp($(spaces)){
+$sp($(spaces))    private static readonly string[] metaDescriptor = {"$(meta-descriptor)"};
+
+$sp($(spaces))    public $(typename)TypeSupport()
+$sp($(spaces))        : base(typeof($(typename)), metaDescriptor, "$(scoped-meta-type-name)", "$(internal-type-name)", "$(key-list)")
+$sp($(spaces))    { }
+
+
+$sp($(spaces))    public override ReturnCode RegisterType(IDomainParticipant participant, string typeName)
+$sp($(spaces))    {
+$sp($(spaces))        return RegisterType(participant, typeName, new $(typename)Marshaler());
+$sp($(spaces))    }
+
+$sp($(spaces))    public override DDS.OpenSplice.DataWriter CreateDataWriter(DatabaseMarshaler marshaler)
+$sp($(spaces))    {
+$sp($(spaces))        return new $(typename)DataWriter(marshaler);
+$sp($(spaces))    }
+
+$sp($(spaces))    public override DDS.OpenSplice.DataReader CreateDataReader(DatabaseMarshaler marshaler)
+$sp($(spaces))    {
+$sp($(spaces))        return new $(typename)DataReader(marshaler);
+$sp($(spaces))    }
+$sp($(spaces))}
+$sp($(spaces))#endregion
+

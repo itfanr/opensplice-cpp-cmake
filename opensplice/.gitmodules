@@ -1,3 +1,0 @@
-[submodule "submods/MPC_ROOT"]
-	path = submods/MPC_ROOT
-	url = git://github.com/ADLINK-IST/MPC_ROOT.git

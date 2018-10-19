@@ -1,0 +1,375 @@
+$sp($(spaces))class $(DLL_IMPORTEXPORT) $(typename)TypeSupportMetaHolder : public ::DDS::OpenSplice::TypeSupportMetaHolder
+$sp($(spaces)){
+$sp($(spaces))public:
+$sp($(spaces))    $(typename)TypeSupportMetaHolder ();
+$sp($(spaces))    virtual ~$(typename)TypeSupportMetaHolder ();
+$sp($(spaces))
+$sp($(spaces))private:
+$sp($(spaces))    ::DDS::OpenSplice::DataWriter * create_datawriter ();
+$sp($(spaces))
+$sp($(spaces))    ::DDS::OpenSplice::DataReader * create_datareader ();
+$sp($(spaces))
+$sp($(spaces))    ::DDS::OpenSplice::DataReaderView * create_view ();
+$sp($(spaces))};
+$sp($(spaces))
+$sp($(spaces))class $(DLL_IMPORTEXPORT) $(typename)TypeSupport : public virtual $(typename)TypeSupportInterface,
+$sp($(spaces))                                                   public ::DDS::OpenSplice::TypeSupport
+$sp($(spaces)){
+$sp($(spaces))public:
+$sp($(spaces))    $(typename)TypeSupport ();
+$sp($(spaces))
+$sp($(spaces))    virtual ~$(typename)TypeSupport ();
+$sp($(spaces))
+$sp($(spaces))private:
+$sp($(spaces))    $(typename)TypeSupport (const $(typename)TypeSupport &);
+$sp($(spaces))
+$sp($(spaces))    void operator= (const $(typename)TypeSupport &);
+$sp($(spaces))};
+$sp($(spaces))
+$sp($(spaces))typedef $(typename)TypeSupportInterface_var $(typename)TypeSupport_var;
+$sp($(spaces))typedef $(typename)TypeSupportInterface_ptr $(typename)TypeSupport_ptr;
+$sp($(spaces))
+$sp($(spaces))class $(DLL_IMPORTEXPORT) $(typename)DataWriter_impl : public virtual $(typename)DataWriter,
+$sp($(spaces))                                                       public ::DDS::OpenSplice::FooDataWriter_impl
+$sp($(spaces)){
+$sp($(spaces))    friend class DDS::OpenSplice::Publisher;
+$sp($(spaces))    friend class $(typename)TypeSupportMetaHolder;
+$sp($(spaces))
+$sp($(spaces))public:
+$sp($(spaces))    virtual ::DDS::InstanceHandle_t register_instance (
+$sp($(spaces))        const $(typename) & instance_data) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::InstanceHandle_t register_instance_w_timestamp (
+$sp($(spaces))        const $(typename) & instance_data,
+$sp($(spaces))        const ::DDS::Time_t & source_timestamp) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t unregister_instance (
+$sp($(spaces))        const $(typename) & instance_data,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t unregister_instance_w_timestamp (
+$sp($(spaces))        const $(typename) & instance_data,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle,
+$sp($(spaces))        const ::DDS::Time_t & source_timestamp) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t write (
+$sp($(spaces))        const $(typename) & instance_data,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t write_w_timestamp (
+$sp($(spaces))        const $(typename) & instance_data,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle,
+$sp($(spaces))        const ::DDS::Time_t & source_timestamp) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t dispose (
+$sp($(spaces))        const $(typename) & instance_data,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t dispose_w_timestamp (
+$sp($(spaces))        const $(typename) & instance_data,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle,
+$sp($(spaces))        const ::DDS::Time_t & source_timestamp) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t writedispose (
+$sp($(spaces))        const $(typename) & instance_data,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t writedispose_w_timestamp (
+$sp($(spaces))        const $(typename) & instance_data,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle,
+$sp($(spaces))        const ::DDS::Time_t & source_timestamp) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t get_key_value (
+$sp($(spaces))        $(typename) & key_holder,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::InstanceHandle_t lookup_instance (
+$sp($(spaces))        const $(typename) & instance_data) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))protected:
+$sp($(spaces))    $(typename)DataWriter_impl ();
+$sp($(spaces))
+$sp($(spaces))    virtual ~$(typename)DataWriter_impl ();
+$sp($(spaces))
+$sp($(spaces))    virtual DDS::ReturnCode_t init (
+$sp($(spaces))                    DDS::OpenSplice::Publisher *publisher,
+$sp($(spaces))                    DDS::OpenSplice::DomainParticipant *participant,
+$sp($(spaces))                    const DDS::DataWriterQos &qos,
+$sp($(spaces))                    DDS::OpenSplice::Topic *a_topic,
+$sp($(spaces))                    const char *name,
+$sp($(spaces))                    DDS::OpenSplice::cxxCopyIn copyIn,
+$sp($(spaces))                    DDS::OpenSplice::cxxCopyOut copyOut);
+$sp($(spaces))
+$sp($(spaces))private:
+$sp($(spaces))    $(typename)DataWriter_impl (const $(typename)DataWriter_impl &);
+$sp($(spaces))
+$sp($(spaces))    void operator= (const $(typename)DataWriter &);
+$sp($(spaces))};
+$sp($(spaces))
+$sp($(spaces))class $(DLL_IMPORTEXPORT) $(typename)DataReader_impl : public virtual $(typename)DataReader,
+$sp($(spaces))                                                       public ::DDS::OpenSplice::FooDataReader_impl
+$sp($(spaces)){
+$sp($(spaces))    friend class DDS::OpenSplice::Subscriber;
+$sp($(spaces))    friend class $(typename)TypeSupportMetaHolder;
+$sp($(spaces))    friend class $(typename)DataReaderView_impl;
+$sp($(spaces))
+$sp($(spaces))public:
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_w_condition (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::ReadCondition_ptr a_condition) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_w_condition (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::ReadCondition_ptr a_condition) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_next_sample (
+$sp($(spaces))        $(typename) & received_data,
+$sp($(spaces))        ::DDS::SampleInfo & sample_info) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_next_sample (
+$sp($(spaces))        $(typename) & received_data,
+$sp($(spaces))        ::DDS::SampleInfo & sample_info) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_instance (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_instance (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_next_instance (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_next_instance (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_next_instance_w_condition (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::ReadCondition_ptr a_condition) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_next_instance_w_condition (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::ReadCondition_ptr a_condition) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t return_loan (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t get_key_value (
+$sp($(spaces))        $(typename) & key_holder,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::InstanceHandle_t lookup_instance (
+$sp($(spaces))        const $(typename) & instance) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))protected:
+$sp($(spaces))    $(typename)DataReader_impl ();
+$sp($(spaces))
+$sp($(spaces))    virtual ~$(typename)DataReader_impl ();
+$sp($(spaces))
+$sp($(spaces))    DDS::ReturnCode_t init (
+$sp($(spaces))            DDS::OpenSplice::Subscriber *subscriber,
+$sp($(spaces))            const DDS::DataReaderQos &qos,
+$sp($(spaces))            DDS::OpenSplice::TopicDescription *a_topic,
+$sp($(spaces))            const char *name,
+$sp($(spaces))            DDS::OpenSplice::cxxCopyIn copyIn,
+$sp($(spaces))            DDS::OpenSplice::cxxCopyOut copyOut);
+$sp($(spaces))
+$sp($(spaces))    static void* dataSeqAlloc (
+$sp($(spaces))        void * data_values,
+$sp($(spaces))        DDS::ULong len);
+$sp($(spaces))
+$sp($(spaces))    static void dataSeqLength (
+$sp($(spaces))        void * data_values,
+$sp($(spaces))        DDS::ULong len);
+$sp($(spaces))
+$sp($(spaces))    static void * dataSeqGetBuffer (
+$sp($(spaces))        void * data_values,
+$sp($(spaces))        DDS::ULong index);
+$sp($(spaces))
+$sp($(spaces))    static void dataSeqCopyOut (
+$sp($(spaces))        const void * from,
+$sp($(spaces))        void * received_data);
+$sp($(spaces))    static void copyDataOut(const void *from, void *to);
+$sp($(spaces))
+$sp($(spaces))private:
+$sp($(spaces))    $(typename)DataReader_impl (const $(typename)DataReader &);
+$sp($(spaces))    void operator= (const $(typename)DataReader &);
+$sp($(spaces))
+$sp($(spaces))    static ::DDS::ReturnCode_t check_preconditions (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples);
+$sp($(spaces))};
+$sp($(spaces))
+$sp($(spaces))class $(DLL_IMPORTEXPORT) $(typename)DataReaderView_impl : public virtual $(typename)DataReaderView,
+$sp($(spaces))                                                           public ::DDS::OpenSplice::FooDataReaderView_impl
+$sp($(spaces)){
+$sp($(spaces))    friend class DDS::OpenSplice::DataReader;
+$sp($(spaces))    friend class $(typename)TypeSupportMetaHolder;
+$sp($(spaces))
+$sp($(spaces))public:
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_w_condition (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::ReadCondition_ptr a_condition) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_w_condition (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::ReadCondition_ptr a_condition) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_next_sample (
+$sp($(spaces))        $(typename) & received_data,
+$sp($(spaces))        ::DDS::SampleInfo & sample_info) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_next_sample (
+$sp($(spaces))        $(typename) & received_data,
+$sp($(spaces))        ::DDS::SampleInfo & sample_info) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_instance (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_instance (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_next_instance (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_next_instance (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::SampleStateMask sample_states,
+$sp($(spaces))        ::DDS::ViewStateMask view_states,
+$sp($(spaces))        ::DDS::InstanceStateMask instance_states) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t read_next_instance_w_condition (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::ReadCondition_ptr a_condition) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t take_next_instance_w_condition (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq,
+$sp($(spaces))        ::DDS::Long max_samples,
+$sp($(spaces))        ::DDS::InstanceHandle_t a_handle,
+$sp($(spaces))        ::DDS::ReadCondition_ptr a_condition) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t return_loan (
+$sp($(spaces))        $(typename)Seq & received_data,
+$sp($(spaces))        ::DDS::SampleInfoSeq & info_seq) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::ReturnCode_t get_key_value (
+$sp($(spaces))        $(typename) & key_holder,
+$sp($(spaces))        ::DDS::InstanceHandle_t handle) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))    virtual ::DDS::InstanceHandle_t lookup_instance (
+$sp($(spaces))        const $(typename) & instance) THROW_ORB_EXCEPTIONS;
+$sp($(spaces))
+$sp($(spaces))protected:
+$sp($(spaces))    $(typename)DataReaderView_impl ();
+$sp($(spaces))
+$sp($(spaces))    virtual ~$(typename)DataReaderView_impl ();
+$sp($(spaces))
+$sp($(spaces))    virtual DDS::ReturnCode_t init (
+$sp($(spaces))        DDS::OpenSplice::DataReader *reader,
+$sp($(spaces))        const char *name,
+$sp($(spaces))        const DDS::DataReaderViewQos &qos,
+$sp($(spaces))        DDS::OpenSplice::cxxCopyIn copyIn,
+$sp($(spaces))        DDS::OpenSplice::cxxCopyOut copyOut);
+$sp($(spaces))
+$sp($(spaces))private:
+$sp($(spaces))    $(typename)DataReaderView_impl (const $(typename)DataReaderView &);
+$sp($(spaces))
+$sp($(spaces))    void operator= (const $(typename)DataReaderView &);
+$sp($(spaces))};
+$sp($(spaces))

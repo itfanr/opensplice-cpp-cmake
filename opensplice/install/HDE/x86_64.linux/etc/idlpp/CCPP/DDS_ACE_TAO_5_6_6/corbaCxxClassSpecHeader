@@ -1,0 +1,12 @@
+#ifndef $upper($(basename))DCPS_IMPL_H_
+#define $upper($(basename))DCPS_IMPL_H_
+
+#include "ccpp.h"
+#include "ccpp_$(basename).h"
+#include "TypeSupportMetaHolder.h"
+#include "TypeSupport.h"
+#include "FooDataWriter_impl.h"
+#include "FooDataReader_impl.h"
+#include "FooDataReaderView_impl.h"
+$(DLL_IMPORTEXPORT_INCLUDE)
+
